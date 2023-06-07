@@ -1,0 +1,37 @@
+class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+    // 👉Brute not able to pass test case
+            // map<int,int>mpp;
+            // ListNode* dummy=head;
+            // while(dummy!=NULL){
+            //     if(mpp.find(dummy->val)!=mpp.end()){
+            //         cout<<dummy->val;
+            //         return dummy;
+            //     }
+            //     else{
+            //         mpp[dummy->val]++;
+            //     }
+            //     dummy=dummy->next;
+            // }
+    //👉 Optimal Approach
+
+    if(head==NULL || head->next==NULL)return 0;
+        ListNode* fast=head;
+        ListNode* slow=head;
+        ListNode* enter=head;
+        while(fast!=NULL && fast->next!=NULL){
+            slow=slow->next;
+            fast=fast->next->next;
+
+            if(slow==fast){
+                while(slow!=enter){
+                    slow=slow->next;
+                    enter=enter->next;
+                }
+                return slow;
+            }
+        }
+        return 0;
+    }
+};
